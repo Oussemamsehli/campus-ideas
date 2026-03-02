@@ -1,0 +1,39 @@
+<div class="container mt-4">
+
+  <!-- Si la suggestion existe -->
+  <div *ngIf="suggestion">
+    
+    <h2>{{ suggestion.title }}</h2>
+    <small class="text-muted">{{ suggestion.category }} — {{ suggestion.date | date:'dd MMM yyyy' }}</small>
+    
+    <p class="mt-3">{{ suggestion.description }}</p>
+
+    <span class="badge"
+      [ngClass]="{
+        'bg-success': suggestion.status === 'acceptee',
+        'bg-danger': suggestion.status === 'refusee',
+        'bg-warning text-dark': suggestion.status === 'en_attente'
+      }">
+      {{ suggestion.status | uppercase }}
+    </span>
+
+    <div class="mt-3">
+      <p>👍 Likes : {{ suggestion.nbLikes }}</p>
+    </div>
+
+    <!-- Bouton retour à la liste -->
+    <button class="btn btn-secondary mt-3" (click)="backToList()">
+      ⬅ Back to list
+    </button>
+
+  </div>
+
+  <!-- Si la suggestion n'existe pas -->
+  <div *ngIf="!suggestion">
+    <p class="text-danger">Suggestion introuvable !</p>
+    <button class="btn btn-secondary" (click)="backToList()">
+      ⬅ Back to list
+    </button>
+  </div>
+
+</div>
